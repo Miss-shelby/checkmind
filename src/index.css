@@ -1,0 +1,202 @@
+@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,300;0,400;0,600;1,400&family=Poppins:wght@300;400;500;600&display=swap');
+
+@theme {
+  --color-primary: #8B3A47;
+  --color-secondary: #F5E6D3;
+  --color-accent: #D4A574;
+  --color-muted: #7A8A8E;
+  --color-background: #FFFBF7;
+  --color-border: #E5D1B8;
+  --color-text: #2D2424;
+}
+
+:root {
+  --primary: #8B3A47;
+  --secondary: #F5E6D3;
+  --accent: #D4A574;
+  --muted: #7A8A8E;
+  --background: #FFFBF7;
+  --border: #E5D1B8;
+  --text: #2D2424;
+}
+
+body {
+  font-family: 'Poppins', sans-serif;
+  color: var(--text);
+  background-color: var(--background);
+  overflow-x: hidden;
+}
+
+h1, h2, h3, h4, .serif {
+  font-family: 'Crimson Pro', serif;
+  font-weight: 400;
+}
+
+.scroll-reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1);
+}
+
+.scroll-reveal.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.nav-scrolled {
+  background-color: rgba(255, 251, 247, 0.85);
+  backdrop-blur: 16px;
+  box-shadow: 0 10px 40px -10px rgba(139, 58, 71, 0.08);
+}
+
+.organic-blob {
+  border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%;
+}
+
+.breathing-circle {
+  animation: breath 8s ease-in-out infinite;
+  transform-origin: center;
+}
+
+@keyframes breath {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.15);
+    opacity: 0.6;
+  }
+}
+
+.line-pattern {
+  background-image: linear-gradient(var(--border) 1px, transparent 1px), linear-gradient(90deg, var(--border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  opacity: 0.05;
+}
+
+.faq-content {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+}
+
+.faq-item.active .faq-content {
+  max-height: 300px;
+  opacity: 1;
+  padding-bottom: 2rem;
+}
+
+.faq-item.active iconify-icon[icon="lucide:plus"] {
+  transform: rotate(45deg);
+}
+
+.service-detail {
+  max-height: 0;
+  overflow: hidden;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0;
+}
+
+.service-card.active .service-detail {
+  max-height: 1000px;
+  opacity: 1;
+  margin-top: 2rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--border);
+}
+
+.service-card.active .expand-icon {
+  transform: rotate(45deg);
+}
+
+.form-step {
+  transition: all 0.4s ease-in-out;
+}
+
+.step-dot.active {
+  background-color: var(--primary);
+  box-shadow: 0 0 0 4px var(--secondary);
+}
+
+.step-line {
+  transition: width 0.5s ease-in-out;
+}
+
+.input-field:focus {
+  border-color: var(--primary);
+  outline: none;
+  box-shadow: 0 0 0 1px var(--primary);
+}
+
+.confirmation-step {
+  position: relative;
+}
+
+.confirmation-step::after {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 50%;
+  width: 100%;
+  height: 1px;
+  background: var(--border);
+  z-index: 0;
+}
+
+.confirmation-step:last-child::after {
+  display: none;
+}
+
+.product-card:hover .add-to-cart-btn {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.add-to-cart-btn {
+  transform: translateY(10px);
+  opacity: 0;
+  transition: all 0.3s ease-out;
+}
+
+.toast-notification {
+  transform: translateX(120%);
+  transition: transform 0.5s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.toast-notification.show {
+  transform: translateX(0);
+}
+
+.cart-item:hover {
+  border-color: var(--primary);
+}
+
+/* View Transitions */
+@view-transition { navigation: auto; }
+html { background-color: var(--background); }
+::view-transition { background-color: var(--background); }
+
+#main-nav { view-transition-name: main-nav; }
+#footer-persistent { view-transition-name: footer-persistent; }
+main { view-transition-name: main-content; }
+
+::view-transition-old(main-nav),
+::view-transition-new(main-nav),
+::view-transition-old(footer-persistent),
+::view-transition-new(footer-persistent) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-old(main-content) {
+  animation: 0.25s ease-out both fade-out;
+}
+::view-transition-new(main-content) {
+  animation: 0.25s ease-in 0.1s both fade-in;
+}
+
+@keyframes fade-out { from { opacity: 1; } to { opacity: 0; } }
+@keyframes fade-in { from { opacity: 0; } to { opacity: 1; } }
